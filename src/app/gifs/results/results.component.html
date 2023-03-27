@@ -1,3 +1,10 @@
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In consequuntur
-    tenetur porro placeat accusamus! Repellendus ad impedit animi, nesciunt
-    error at mollitia distinctio iste atque eveniet nihil pariatur, nemo illo.</p>
+<div class="row">
+  <div *ngFor="let item of results" class="col-md-4 col-sm-6">
+    <div class="card">
+      <img class="card-img-top" [src]="item.images.downsized_medium.url" alt="" />
+      <div class="card-body">
+        <p class="card-text">{{ item.title }}</p>
+      </div>
+    </div>
+  </div>
+</div>

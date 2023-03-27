@@ -10,7 +10,10 @@ export class GifsService {
   private apiKey: string = 'BgOTeUN6Xf6Iwg9RGCJVUDbZ3ow3xtJ1';
   public results: Gif[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this._history = JSON.parse(localStorage.getItem('historial')!) || [];
+    this.results = JSON.parse(localStorage.getItem('gifs')!) || [];
+  }
 
   public get gethistory(): string[] {
     return [...this._history];
@@ -21,6 +24,8 @@ export class GifsService {
     if (!this._history.includes(arg)) {
       this._history.unshift(arg);
       this._history = this._history.splice(0, 10);
+
+      localStorage.setItem('historial', JSON.stringify(this._history));
     }
 
     this.http
@@ -30,6 +35,7 @@ export class GifsService {
       .subscribe((res) => {
         console.log(res);
         this.results = res.data;
+        localStorage.setItem('gifs', JSON.stringify(this.results));
       });
   }
 }
